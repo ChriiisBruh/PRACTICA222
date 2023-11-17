@@ -3,13 +3,13 @@ import { useState, useEffect } from 'react';
 import axios from "axios";
 function App() {
 
-  const [profile, setProfile] = useState([]);
+  const [profile, setProfile] = useState({});
 
   useEffect(() => {
-    const fetchData =  async () => {
+    const fetchData = async () => {
       try {
         const response = await axios.get('http://localhost:3003/api/profile');
-        setProfile(response.data);
+        setProfile(response.data[0]);
       } catch (error) {
         console.error('Error al obtener datos:', error);
       }
@@ -21,53 +21,37 @@ function App() {
   console.log(profile);
 
   return (
-    <><><header>
-      {profile.length > 0 && (
+    <div className="App">
+      {profile && Object.keys(profile).length > 0 && (
         <div>
-          <h1>Nombre: {profile[0].name} {profile[0].lastName}</h1>
+          <h1>{profile.name} {profile.lastName}</h1>
+          <p>Email: {profile.email}</p>
+          <p>City: {profile.city}</p>
+          <p>Country: {profile.country}</p>
+          <p>Summary: {profile.summary}</p>
+
+          <h2>Frameworks:</h2>
+          <ul>
+            {profile.frameworks && profile.frameworks.map((framework) => (
+              <li key={framework.name}>
+                {`${framework.name} - Nivel: ${framework.level}, Año: ${framework.year}`}
+              </li>
+            ))}
+          </ul>
+
+          <h2>Hobbies:</h2>
+          <ul>
+            {profile.hobbies && profile.hobbies.map((hobby) => (
+              <li key={hobby.name}>
+                {`${hobby.name} - ${hobby.description}`}
+              </li>
+            ))}
+          </ul>
         </div>
       )}
-    </header><><><div>
-    </div><div>
-        {profile.length > 0 && (
-          <div>
-            <p>Email: {profile[0].email}</p>
-            <p>Origen: {profile[0].city},{profile[0].country}</p>
-          </div>
-        )}
-        {profile.length > 0 && (
-          <div>
-            <h1>Informacion personal</h1>
-          <p>{profile[0].summary}</p>
-          </div>
-        )}
-        {profile.length > 0 && (
-          <div>
-            <h1>Frameworks</h1>
-          <p>{profile[0].frameworks[0].name}, {profile[0].frameworks[0].level}</p>
-          <p>{profile[0].frameworks[0].year}</p>
-          <h1></h1>
-          <p>{profile[0].frameworks[1].name}, {profile[0].frameworks[1].level}</p>
-          <p>{profile[0].frameworks[1].year}</p>
-          </div>
-        )}
-        {profile.length > 0 && (
-          <div>
-            <h1>Hobbies</h1>
-          <p>{profile[0].hobbies[0].name}, {profile[0].hobbies[0].description}</p>
-          <h1></h1>
-          <p>{profile[0].hobbies[1].name}, {profile[0].hobbies[1].description}</p>
-          </div>
-        )}
-      </div></><div>
-          
-        </div></></><div>
-          
-          <h1></h1>
-        
-      </div></>
-        
-    );
+    </div>
+
+  );
 
 }
 
