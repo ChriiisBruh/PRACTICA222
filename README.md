@@ -32,6 +32,6 @@ Asegúrate de tener instalados los siguientes programas en tu máquina:
    ```bash
    npm install
 
-3. Ejecutar el proyecto backend con:
+3. Ejecutar el proyecto frontend con:
    ```bash
    npm start
