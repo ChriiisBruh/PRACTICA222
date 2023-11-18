@@ -1,6 +1,8 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 import axios from "axios";
+import { FaUser } from 'react-icons/fa';
+
 function App() {
 
   const [profile, setProfile] = useState({});
@@ -21,32 +23,55 @@ function App() {
   console.log(profile);
 
   return (
-    <div className="App">
-      {profile && Object.keys(profile).length > 0 && (
+    <div class=".container">
+      {profile &&(
         <div>
-          <h1>{profile.name} {profile.lastName}</h1>
-          <p>Email: {profile.email}</p>
-          <p>City: {profile.city}</p>
-          <p>Country: {profile.country}</p>
-          <p>Summary: {profile.summary}</p>
+          <div className='App'>
+            <div class="alert alert-success" role="alert">
+              <FaUser size="7em" />
+              <h1>{profile.name} {profile.lastName}</h1>
+              <p>{profile.email} - {profile.city}, {profile.country}</p>
+            </div>
+          </div>
 
-          <h2>Frameworks:</h2>
-          <ul>
-            {profile.frameworks && profile.frameworks.map((framework) => (
-              <li key={framework.name}>
-                {`${framework.name} - Nivel: ${framework.level}, Año: ${framework.year}`}
-              </li>
-            ))}
-          </ul>
+          <div class="alert alert-secondary" role="alert">
+            <div className='App'>
+              <h2>Información personal</h2>
+              <p>  {profile.summary}</p>
+            </div>
 
-          <h2>Hobbies:</h2>
-          <ul>
-            {profile.hobbies && profile.hobbies.map((hobby) => (
-              <li key={hobby.name}>
-                {`${hobby.name} - ${hobby.description}`}
-              </li>
-            ))}
-          </ul>
+
+            <div className="row justify-content-center align-items-center">
+              <div className="col-md-4">
+                <h2>Frameworks:</h2>
+                <ul>
+                  {profile.frameworks && profile.frameworks.map((framework) => (
+                    <li key={framework.name}>
+                      {framework.name} - {framework.level}, {framework.year}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="col-md-4">
+                <h2>Hobbies:</h2>
+                <ul>
+                  {profile.hobbies && profile.hobbies.map((hobby) => (
+                    <li key={hobby.name}>
+                      {hobby.name} - {hobby.description}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+            </div>
+
+
+
+
+
+
+          </div>
         </div>
       )}
     </div>
