@@ -5,6 +5,8 @@ require("dotenv").config();
 const app = express();
 const port = 3003;
 const cors = require('cors');
+const seeder = require("./seeders");
+
 app.use(cors());
 app.use(express.json());
 const apiPractica = 
@@ -14,16 +16,18 @@ const apiPractica =
 
 //RUTAS
 app.get("/",(req,res)=>{
-    res.send("Bienvenido a la API de Practica 2");
+    res.send("Bienvenido a la API de Practica 3");
 })
 
 app.use("/api",userRoutes)
 
-
 //mongoDB connection
 mongoose.connect(process.env.MONGODB_URI)
-.then(() => console.log("Conectado a MONGODB"))
-.catch((error) =>console.error(error));
+    .then(() => {
+        console.log("Conectado a MONGODB");
+        seeder;
+    })
+    .catch((error) => console.error(error));
 
 app.listen(port, () => {
     console.log(`API  en el puerto ${port}`);
