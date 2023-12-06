@@ -54,6 +54,14 @@ Asegúrate de tener instalados los siguientes programas en tu máquina:
    ```bash
    npm install
 
-3. Ejecutar el proyecto frontend con:
+3. Ve al archivo config.js del FrontEndMobile y cambia la IP por la tuya (puedes verla yendo a la consola cmd, y escribiendo ipconfig, aqui usaremos la IP que aparece en IPv4 Address)
+   ```bash
+   const ipAddress = '192.168.0.3'; // Coloca aquí tu dirección IP   
+
+4. Ejecutar el proyecto frontend con:
    ```bash
    npx expo start
+
+5. Si tenemos la aplicacion, escaneamos el codigo desde nuestro celular
+6. Si no tenemos la aplicacion, presionamos luego del paso numero 4, la tecla "w" para que se abra en navegador, aqui lo adaptamos a un dispositivo movil.
+   
