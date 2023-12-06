@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import axios from 'axios';
 import { Ionicons } from '@expo/vector-icons';
+import ipAddress from './config';
 
 export default function App() {
   const [profile, setProfile] = useState({});
@@ -11,7 +12,7 @@ export default function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://192.168.0.3:3003/api/profile');
+        const response = await axios.get(`http://${ipAddress}:3003/api/profile`);
         setProfile(response.data[0]);
         setEditedProfile(response.data[0]);
       } catch (error) {
@@ -50,7 +51,7 @@ export default function App() {
   const handleEdit = async () => {
     if (isEditing) {
       try {
-        await axios.put('http://192.168.0.3:3003/api/profile', editedProfile);
+        await axios.put(`http://${ipAddress}:3003/api/profile`, editedProfile);
         setProfile(editedProfile);
       } catch (error) {
         console.error('Error al guardar los cambios:', error);
@@ -61,7 +62,7 @@ export default function App() {
       setIsEditing(true);
     }
   };
-  
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       {profile && (
